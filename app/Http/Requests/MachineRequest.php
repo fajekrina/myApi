@@ -24,6 +24,7 @@ class MachineRequest extends FormRequest
     public function rules()
     {
         return [
+            'barcode_id' => 'required',
             'type_id' => 'required',
             'brand_id' => 'required',
             'machine_name' => 'required',
@@ -43,6 +44,7 @@ class MachineRequest extends FormRequest
     public function messages()
     {
         return [
+            'barcode_id.required' => 'A barcode id is required',
             'type_id.required' => 'A type is required',
             'brand_id.required' => 'A brand is required',
             'machine_name.required' => 'A machine name is required',

@@ -61,7 +61,8 @@ class MachineController extends Controller
      */
     public function show($id)
     {
-        $machine = Machine::findOrFail($id);
+        $machine = Machine::with('machine_brand', 'machine_type')->findOrFail($id);
+        // dd($machine);
 
         return view('machine.show', compact('machine'));
     }

@@ -31,8 +31,9 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Title</th>
-                                            <th>Description</th>
+                                            <th>Barcode ID</th>
+                                            <th>Machine Name</th>
+                                            <th>Brand Name</th>
                                             <th>Created At</th>
                                             <th>Last Updated</th>
                                             <th>Aksi</th>
@@ -42,26 +43,29 @@
                                         @foreach ($machines as $item)
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $item->title }}</td>
-                                                <td>{{ $item->description }}</td>
+                                                <td>{{ $item->barcode_id }}</td>
+                                                <td>{{ $item->machine_name }}</td>
+                                                <td>{{ $item->brand_id }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y h:m:s') }}
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($item->updated_at)->format('d/m/Y h:m:s') }}
                                                 </td>
                                                 <td>
                                                     <div class="d-flex">
-                                                        <span><a href="{{ route('machine.show', $item->id) }}"
+                                                        <span><a href="{{ route('machine.show', $item->barcode_id) }}"
                                                                 class="btn btn-info"><i class="fa fa-eye"></i></a></span>
-                                                        <span><a href="{{ route('machine.edit', $item->id) }}"
+                                                        <span><a href="{{ route('machine.edit', $item->barcode_id) }}"
                                                                 class="btn btn-warning"><i
                                                                     class="fa fa-pencil"></i></a></span>
-                                                        <form action="{{ route('machine.destroy', $item->id) }}"
+                                                        @if(Auth::user()->role == 'super_admin')            
+                                                        <form action="{{ route('machine.destroy', $item->barcode_id) }}"
                                                             method="post">
                                                             @method('delete')
                                                             @csrf
                                                             <span><button onclick="return confirm('Are you sure?')"
                                                                     class="btn btn-danger d-block" type="submit"><i
                                                                         class="fa fa-trash"></i></button></span>
+                                                        @endif                
                                                     </div>
                                                     </form>
                                                 </td>

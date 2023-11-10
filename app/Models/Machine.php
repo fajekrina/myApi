@@ -12,6 +12,7 @@ class Machine extends Model
     protected $table = 'machines';
     protected $primaryKey = 'barcode_id';
     protected $fillable = [
+        'barcode_id',
         'type_id',
         'brand_id',
         'machine_name',
@@ -28,11 +29,11 @@ class Machine extends Model
     ];
 
     public function machine_brand(){
-        return $this->belongsTo(MachineBrand::class, 'id');
+        return $this->belongsTo(MachineBrand::class, 'brand_id');
     }
     
     public function machine_type(){
-        return $this->belongsTo(MachineType::class, 'id');
+        return $this->belongsTo(MachineType::class, 'type_id');
     }
 
     public function machine_mutation(){

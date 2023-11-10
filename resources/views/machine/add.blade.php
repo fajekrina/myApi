@@ -38,6 +38,18 @@
                                       </div>
                                     </div>
                                     <div class="form-row">
+                                      <div class="form-group col-md-12">
+                                        <label for="barcode_id">Machine ID</label>
+                                        <input type="number" class="form-control @error('barcode_id') is-invalid @enderror" id="barcode_id"
+                                          name="barcode_id" value="{{ old('barcode_id') }}" required>
+                                        @error('barcode_id')
+                                        <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                      </div>
+                                    </div>
+                                    <div class="form-row">
                                         <div class="form-group col-md-12">
                                           <label for="brand_id">Brand Name</label>
                                           <select class="form-control @error('brand_id') is-invalid @enderror" id="brand_id" name="brand_id" required>
