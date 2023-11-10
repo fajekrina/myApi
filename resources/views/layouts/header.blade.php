@@ -6,7 +6,7 @@
                 <span class="toggle-icon"><i class="icon-menu"></i></span>
             </div>
         </div>
-        <div class="header-left">
+        {{-- <div class="header-left">
             <div class="input-group icons">
                 <div class="input-group-prepend">
                     <span class="input-group-text bg-transparent border-0 pr-2 pr-sm-3" id="basic-addon1"><i
@@ -19,7 +19,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
         <div class="header-right">
             <ul class="clearfix">
                 <li class="icons dropdown d-none d-md-flex">
@@ -28,7 +28,7 @@
                 <li class="icons dropdown">
                     <div class="user-img c-pointer position-relative" data-toggle="dropdown">
                         <span class="activity active"></span>
-                        <img src="images/user/1.png" height="40" width="40" alt="">
+                        <img src="{{ asset('assets/images/user/1.png') }}" height="40" width="40" alt="">
                     </div>
                     <div class="drop-down dropdown-profile   dropdown-menu">
                         <div class="dropdown-content-body">

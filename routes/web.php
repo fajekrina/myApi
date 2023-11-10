@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\MachineController;
+use App\Http\Controllers\MachineBrandController;
+use App\Http\Controllers\MachineTypeController;
+use App\Http\Controllers\MachineMutationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +34,18 @@ Route::middleware(['auth'])->group(function() {
     Route::get('/', [AuthenticationController::class, 'home'])->name('home');
     Route::get('logout', [AuthenticationController::class, 'Logout'])->name('logout');
     
+    Route::get('token', [TokenController::class, 'index'])->name('token.index');
+    Route::get('token-generate', [TokenController::class, 'store'])->name('token.store');
+    Route::get('token-regenerate', [TokenController::class, 'update'])->name('token.update');
+
     Route::middleware(['role:admin'])->group(function() {
         Route::resource('article', ArticleController::class);
         // Route::resource('token', TokenController::class);
-        Route::get('token', [TokenController::class, 'index'])->name('token.index');
-        Route::get('token-generate', [TokenController::class, 'store'])->name('token.store');
-        Route::get('token-regenerate', [TokenController::class, 'update'])->name('token.update');
     });
+
+    Route::resource('machine', MachineController::class);
+    Route::resource('machine_brand', MachineBrandController::class);
+    Route::resource('machine_type', MachineTypeController::class);
+    Route::resource('machine_mutation', MachineMutationController::class);
 });
+

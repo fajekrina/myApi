@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticleRequest extends FormRequest
+class MachineTypeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,7 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            'type_name' => 'required',
         ];
     }
 
@@ -37,18 +36,7 @@ class ArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'A title is required',
-            'description.required' => 'A description is required',
+            'type_name.required' => 'A type name is required',
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
     }
 }

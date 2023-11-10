@@ -3,8 +3,10 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Contracts\Validation\Validator;
 
-class ArticleRequest extends FormRequest
+class MachineBrandRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +26,8 @@ class ArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'description' => 'required',
+            'brand_name' => 'required',
+            'country_of_origin' => 'required',
         ];
     }
 
@@ -37,18 +39,8 @@ class ArticleRequest extends FormRequest
     public function messages()
     {
         return [
-            'title.required' => 'A title is required',
-            'description.required' => 'A description is required',
+            'brand_name.required' => 'A brand name is required',
+            'country_of_origin.required' => 'A country of origin is required',
         ];
-    }
-
-    public function failedValidation(Validator $validator)
-
-    {
-        throw new HttpResponseException(response()->json([
-            'success'   => false,
-            'message'   => 'Validation errors',
-            'data'      => $validator->errors()
-        ]));
     }
 }
