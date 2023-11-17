@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('title', 'Machine - MyMachines')
-@section('machine', 'active')
+@section('machine_type', 'active')
 
 @section('content')
     <div class="content-body">

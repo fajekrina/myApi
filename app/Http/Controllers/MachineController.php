@@ -62,9 +62,10 @@ class MachineController extends Controller
     public function show($id)
     {
         $machine = Machine::with('machine_brand', 'machine_type')->findOrFail($id);
+        $mutations = MachineMutation::where('barcode_id', $id)->get();
         // dd($machine);
 
-        return view('machine.show', compact('machine'));
+        return view('machine.show', compact('machine', 'mutations'));
     }
 
     /**
@@ -96,23 +97,23 @@ class MachineController extends Controller
 
         $machine = Machine::findOrFail($id);
 
-        $machine->update($validatedData);
-
         if(
             trim(strtolower($validatedData["warehouse_location"])) != trim(strtolower($machine->warehouse_location)) ||
             trim(strtolower($validatedData["station_location"])) != trim(strtolower($machine->station_location)) ||
             trim(strtolower($validatedData["floor_location"])) != trim(strtolower($machine->floor_location))
         ) {
-            $mutation = new Mutation;
+            $mutation = new MachineMutation;
             $mutation->barcode_id = $id;
             $mutation->previous_warehouse_location = $machine->warehouse_location;
             $mutation->previous_station_location = $machine->station_location;
             $mutation->previous_floor_location = $machine->floor_location || null;
-            $mutation->new_warehouse_location = $$validatedData["warehouse_location"];
+            $mutation->new_warehouse_location = $validatedData["warehouse_location"];
             $mutation->new_station_location = $validatedData["station_location"];
             $mutation->new_floor_location = $validatedData["floor_location"] || null;
+            $mutation->save();
 
         }
+        $machine->update($validatedData);
 
         return redirect()->route('machine.index');
     }
@@ -128,6 +129,8 @@ class MachineController extends Controller
         $machine = Machine::findOrFail($id);
 
         $machine->delete();
+
+        $mutations = MachineMutation::where('barcode_id', $id)->delete();
 
         return redirect()->route('machine.index');
     }
