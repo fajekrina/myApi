@@ -8,6 +8,7 @@ use App\Http\Requests\LoginRequest;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Passport\Token;
 
 class AuthenticationController extends Controller
 {
@@ -21,6 +22,12 @@ class AuthenticationController extends Controller
         if (Auth::attempt($credentials)) {
             // dd("disini");
             $token = $request->session()->regenerate();
+
+            $rtoken = Auth::user()->createToken('auth_token')->accessToken;
+
+            $user = User::findOrFail(Auth::user()->id);
+            $user->access_token = $rtoken;
+            $user->save();
             // dd($token);
             
             return redirect()->route('home');
@@ -31,11 +38,22 @@ class AuthenticationController extends Controller
 
     public function Logout(Request $request)
     {
+        $oldToken = Token::where('user_id', '=', Auth::user()->id)->where('revoked', '=', 0)->first();
+
+        if(!empty($oldToken)) {
+            $oldToken->revoke();
+        }
+        
+        $user = User::findOrFail(Auth::user()->id);
+        $user->access_token = null;
+        $user->save();
+
         Auth::logout();
 
         $request->session()->invalidate();
  
         $request->session()->regenerateToken();
+
 
         return redirect()->route('login');
     }

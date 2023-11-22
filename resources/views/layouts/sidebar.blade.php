@@ -31,6 +31,16 @@
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Machine Type</span>
                 </a>
             </li>
+            <li class="@yield('unit')">
+                <a href="{{ route('unit.index') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Unit</span>
+                </a>
+            </li>
+            <li class="@yield('department')">
+                <a href="{{ route('department.index') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Department</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

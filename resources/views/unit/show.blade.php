@@ -1,6 +1,6 @@
 @extends('layouts.main')
-@section('title', 'Article - MyArticle')
-@section('article', 'active')
+@section('title', 'Unit - MyUnit')
+@section('unit', 'active')
 
 @section('content')
     <div class="content-body">
@@ -9,8 +9,8 @@
             <div class="col p-md-0">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{{ url('blank') }}">Dashboard</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('article.index') }}">Article</a></li>
-                    <li class="breadcrumb-item active"><a href="{{ route('article.show', $article->id) }}">Edit</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('unit.index') }}">Unit</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('unit.show', $unit->id) }}">Edit</a></li>
                 </ol>
             </div>
         </div>
@@ -21,16 +21,16 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Detail Article</h4>
+                            <h4 class="card-title">Detail Unit</h4>
                             <div class="basic-form">
                                 <form>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label>Title</label>
-                                            <input type="text" name="title" id="title"
-                                                class="form-control @error('title') is-invalid @enderror"
-                                                value="{{ $article->title }}" placeholder="title" readonly>
-                                            @error('title')
+                                            <label>Name</label>
+                                            <input type="text" name="name" id="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                value="{{ $unit->name }}" placeholder="name" readonly>
+                                            @error('name')
                                                 <span class="text-danger">
                                                     {{ $message }}
                                                 </span>
@@ -39,9 +39,9 @@
                                     </div>
                                     <div class="form-row">
                                         <div class="form-group col-md-12">
-                                            <label>Description</label>
-                                            <textarea name="description" id="description" class="form-control @error('description') is-invalid @enderror" readonly>{{ $article->description }}</textarea>
-                                            @error('description')
+                                            <label>slug</label>
+                                            <textarea name="slug" id="slug" class="form-control @error('slug') is-invalid @enderror" readonly>{{ $unit->slug }}</textarea>
+                                            @error('slug')
                                                 <span class="text-danger">
                                                     {{ $message }}
                                                 </span>
