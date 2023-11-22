@@ -13,7 +13,7 @@ class PeminjamanRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,23 @@ class PeminjamanRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'mobil_id' => 'required',
+            'tgl_awal' => 'required',
+            'tgl_akhir' => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'mobil_id.required' => 'A mobil is required',
+            'tgl_awal.required' => 'A tgl awal is required',
+            'tgl_akhir.required' => 'A tgl akhir is required',
         ];
     }
 }

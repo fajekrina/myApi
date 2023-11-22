@@ -15,7 +15,7 @@ class CreatePengembaliansTable extends Migration
     {
         Schema::create('pengembalians', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('peminjaman_id')->constrained('peminjamen')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('peminjaman_id')->constrained('peminjamen')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_kembali');
             $table->integer('durasi');
             $table->integer('total_tarif');

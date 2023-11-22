@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Mobil;
 use Illuminate\Http\Request;
+use App\Http\Requests\MobilRequest;
+use Illuminate\Support\Facades\Http;
+use Laravel\Passport\Token;
+use Illuminate\Support\Facades\Auth;
 
 class MobilController extends Controller
 {
@@ -13,7 +18,9 @@ class MobilController extends Controller
      */
     public function index()
     {
-        //
+        $mobils = Mobil::all();
+
+        return view('mobil.index', compact('mobils'));
     }
 
     /**
@@ -23,7 +30,7 @@ class MobilController extends Controller
      */
     public function create()
     {
-        //
+        return view('mobil.add');
     }
 
     /**
@@ -32,9 +39,13 @@ class MobilController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MobilRequest $request)
     {
-        //
+        $validatedData = $request->all();
+        
+        $mobil = Mobil::create($validatedData);
+        
+        return redirect()->route('mobil.index');
     }
 
     /**

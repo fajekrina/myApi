@@ -15,8 +15,8 @@ class CreatePeminjamenTable extends Migration
     {
         Schema::create('peminjamen', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->unsignedBigInteger('mobil_id')->constrained('mobils')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('mobil_id')->constrained('mobils')->onUpdate('cascade')->onDelete('cascade');
             $table->date('tgl_awal');
             $table->date('tgl_akhir');
             $table->timestamps();

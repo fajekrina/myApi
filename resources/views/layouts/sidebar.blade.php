@@ -41,6 +41,21 @@
                     <i class="icon-badge menu-icon"></i><span class="nav-text">Department</span>
                 </a>
             </li>
+            <li class="@yield('mobil')">
+                <a href="{{ route('mobil.index') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Mobil</span>
+                </a>
+            </li>
+            <li class="@yield('peminjaman')">
+                <a href="{{ route('peminjaman.index') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Peminjaman</span>
+                </a>
+            </li>
+            <li class="@yield('pengembalian')">
+                <a href="{{ route('pengembalian.index') }}" aria-expanded="false">
+                    <i class="icon-badge menu-icon"></i><span class="nav-text">Pengembalian</span>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

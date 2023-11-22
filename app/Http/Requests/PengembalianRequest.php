@@ -13,7 +13,7 @@ class PengembalianRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class PengembalianRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'mobil_id' => 'required',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'mobil_id.required' => 'A nomor plat is required',
         ];
     }
 }

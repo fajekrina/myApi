@@ -10,6 +10,9 @@ use App\Http\Controllers\MachineTypeController;
 use App\Http\Controllers\MachineMutationController;
 use App\Http\Controllers\MDepartmentController;
 use App\Http\Controllers\MUnitController;
+use App\Http\Controllers\MobilController;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\PengembalianController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +49,11 @@ Route::middleware(['auth'])->group(function() {
         // Route::resource('token', TokenController::class);
     });
     Route::resource('department', MDepartmentController::class);
+
+    Route::resource('mobil', MobilController::class);
+    Route::get('peminjaman/find/{awal}/{akhir}', [PeminjamanController::class, 'find'])->name('peminjaman.find');
+    Route::resource('peminjaman', PeminjamanController::class);
+    Route::resource('pengembalian', PengembalianController::class);
 
     Route::resource('machine', MachineController::class);
     Route::resource('machine_brand', MachineBrandController::class);
